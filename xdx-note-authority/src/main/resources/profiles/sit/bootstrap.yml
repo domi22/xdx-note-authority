@@ -1,0 +1,32 @@
+start:
+  nacos:
+    ip: 192.168.15.128
+    port: 8848
+    group: ${spring.application.name}
+    namespace: ${spring.profiles.active}
+server:
+  port: 8887
+  servlet:
+    context-path: /xdx-note-authority
+spring:
+  application:
+    name: xdx-note-authority
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${start.nacos.ip}:${start.nacos.port}
+        username: nacos
+        password: nacos
+      config:
+        server-addr: ${start.nacos.ip}:${start.nacos.port}
+        namespace: ${start.nacos.namespace}
+        group: ${start.nacos.group}
+        file-extension: yml
+#-----------------------------------DAO层-mybatis-2/2[开始]-----------------------------------------------
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
